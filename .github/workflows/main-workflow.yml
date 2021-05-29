@@ -27,7 +27,7 @@ jobs:
           flake8 . --count --exit-zero --max-line-length=80 --ignore=E111,E121,E126 --statistics
       - name: Run and collect coverage
         run: |
-          coverage run --branch bms_sender_test.py
+          coverage run --branch bms_sender/bms_sender_test.py
           coverage html
       - name: Upload coverage
         uses: actions/upload-artifact@v2
@@ -36,4 +36,4 @@ jobs:
           path: ./htmlcov
           retention-days: 1
       - name: Run
-        run: python bms_sender.py
+        run: python bms_sender/bms_sender.py
