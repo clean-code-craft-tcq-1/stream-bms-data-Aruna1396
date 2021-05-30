@@ -2,10 +2,7 @@ import time
 
 
 def print_bms_readings_to_console(bms_readings):
-    formatted_bms_readings = ""
-    for key, value in bms_readings.items():
-        formatted_bms_readings += key + ': ' + str(value) + ' \t'
-        formatted_bms_readings.strip()
+    formatted_bms_readings = '\t'.join("{}: {} ".format(key, value) for key, value in bms_readings.items())
     print(formatted_bms_readings)
     return 'CONSOLE_OUTPUT_SENT'
 
