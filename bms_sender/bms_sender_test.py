@@ -9,21 +9,21 @@ from mock import patch
 
 class BMSSenderTest(unittest.TestCase):
 
+    bms_parameters_with_range = {'charging_temperature': {'min': 0, 'max': 45},
+                                 'charge_rate': {'min': 0, 'max': 0.8},
+                                 'SOC': {'min': 20, 'max': 80}}
     """"
     *********************************
         BMS Sender Test
     *********************************
     """
     def test_if_bms_sender_successfully_streams_data(self):
-        bms_parameters_with_range = {'charging_temperature': {'min': 0, 'max': 45},
-                                     'charge_rate': {'min': 0, 'max': 0.8},
-                                     'SOC': {'min': 20, 'max': 80}}
-        self.assertEqual(bms_sender.stream_bms_readings("local_database", "console", bms_parameters_with_range, 0.2, 3),
+        self.assertEqual(bms_sender.stream_bms_readings("local_database", "console", self.bms_parameters_with_range, 0.2, 3),
                          'BMS_STREAMING_COMPLETE')
 
     def test_if_bms_sender_reports_error_for_invalid_inputs(self):
         bms_parameters_with_range = {}
-        self.assertEqual(bms_sender.stream_bms_readings("local_database", "console", bms_parameters_with_range, 1, None)
+        self.assertEqual(bms_sender.stream_bms_readings("local_database", "console", self.bms_parameters_with_range, 1, None)
                          , 'INVALID_INPUT_STREAM_FAILED')
 
     """"
@@ -64,11 +64,9 @@ class BMSSenderTest(unittest.TestCase):
             self.assertFalse(bms_input.is_stream_parameters_valid(stream_parameter[0], stream_parameter[1]))
 
     def test_checks_if_input_is_valid(self):
-        bms_parameters_with_range = {'charging_temperature': {'min': 0, 'max': 45},
-                                     'charge_rate': {'min': 0, 'max': 0.8}}
-        self.assertEqual(bms_input.is_input_valid("local_database", "console", bms_parameters_with_range, 1, 15),
+        self.assertEqual(bms_input.is_input_valid("local_database", "console", self.bms_parameters_with_range, 1, 15),
                          'VALID_INPUT')
-        self.assertEqual(bms_input.is_input_valid("local_database", "console", bms_parameters_with_range, None, 0),
+        self.assertEqual(bms_input.is_input_valid("local_database", "console", self.bms_parameters_with_range, None, 0),
                          'INVALID_INPUT')
 
     """"
@@ -77,14 +75,11 @@ class BMSSenderTest(unittest.TestCase):
     *********************************
     """
     def test_yields_decimal_place_for_rounding_off_bms_data(self):
-        bms_parameters_with_range = {'charging_temperature': {'min': 0, 'max': 45},
-                                     'charge_rate': {'min': 0, 'max': 0.8},
-                                     'SOC': {'min': 20, 'max': 80}}
         expected_output = [bms_generator.INTEGER_DECIMAL_PLACE, bms_generator.FLOAT_DECIMAL_PLACE,
                            bms_generator.INTEGER_DECIMAL_PLACE]
         input_values = ['charging_temperature', 'charge_rate', 'SOC']
         for i in range(2):
-            self.assertEqual(bms_generator.set_bms_parameter_decimal_place(input_values[i], bms_parameters_with_range),
+            self.assertEqual(bms_generator.set_bms_parameter_decimal_place(input_values[i], self.bms_parameters_with_range),
                              expected_output[i])
 
     """"
@@ -95,11 +90,9 @@ class BMSSenderTest(unittest.TestCase):
 
     @patch('generic_libs.bms_generator.generate_bms_readings')
     def test_get_bms_readings_from_mock_bms_generator(self, mock_bms_generator):
-        bms_parameters_with_range = {'charging_temperature': {'min': 0, 'max': 45},
-                                     'charge_rate': {'min': 0, 'max': 0.8}}
-        mock_bms_generator.return_value = {'charging_temperature': 30, 'charge_rate': 0.49}
-        self.assertEqual(bms_sender.get_bms_readings_from_bms_generator(bms_parameters_with_range),
-                         {'charging_temperature': 30, 'charge_rate': 0.49})
+        mock_bms_generator.return_value = {'charging_temperature': 30, 'charge_rate': 0.49, 'SOC': 39}
+        self.assertEqual(bms_sender.get_bms_readings_from_bms_generator(self.bms_parameters_with_range),
+                         {'charging_temperature': 30, 'charge_rate': 0.49, 'SOC': 39})
 
 
 if __name__ == '__main__':
