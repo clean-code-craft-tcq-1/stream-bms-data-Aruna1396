@@ -123,7 +123,7 @@ class BMSSenderTest(unittest.TestCase):
         mock_bms_generator.return_value = {}
         self.assertEqual(bms_sender.send_bms_readings_to_console(bms_sender.get_bms_readings_from_bms_generator
                                                                  (self.bms_parameters_with_range)),
-                         'STEAM_FAILED_INVALID_BMS_DATA')
+                         'STREAM_FAILED_INVALID_BMS_DATA')
 
 
 if __name__ == '__main__':

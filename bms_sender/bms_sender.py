@@ -11,7 +11,7 @@ def send_bms_readings_to_console(bms_parameters):
     if len(bms_parameters) != 0:
         return output.print_bms_readings_to_console(bms_parameters)
     else:
-        return 'STEAM_FAILED_INVALID_BMS_DATA'
+        return 'STREAM_FAILED_INVALID_BMS_DATA'
 
 
 send_bms_readings = {
