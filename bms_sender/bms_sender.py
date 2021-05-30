@@ -8,7 +8,10 @@ def get_bms_readings_from_bms_generator(bms_parameters):
 
 
 def send_bms_readings_to_console(bms_parameters):
-    return output.print_bms_readings_to_console(bms_parameters)
+    if len(bms_parameters) != 0:
+        return output.print_bms_readings_to_console(bms_parameters)
+    else:
+        return 'STEAM_FAILED_INVALID_BMS_DATA'
 
 
 send_bms_readings = {
@@ -34,6 +37,7 @@ if __name__ == '__main__':
 
     bms_parameters_with_range = {'charging_temperature': {'min': 0, 'max': 45},
                                  'charge_rate': {'min': 0, 'max': 0.8}}
-    bms_result = stream_bms_readings("local_database", "console", bms_parameters_with_range, 1, 5)
+    bms_result = stream_bms_readings("local_database", "console", bms_parameters_with_range, 1, 15)
     if bms_result is not None:
         print('\n', bms_result)
+
