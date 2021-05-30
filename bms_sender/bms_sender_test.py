@@ -95,7 +95,7 @@ class BMSSenderTest(unittest.TestCase):
 
     def test_print_to_console_using_mock_stdout(self):
         bms_readings = {'charging_temperature': 38, 'charge_rate': 0.12}
-        expected_output = 'charging_temperature: 38  \t  charge_rate: 0.12  \t  \n'
+        expected_output = 'charging_temperature: 38 \tcharge_rate: 0.12 \t\n'
         with patch('sys.stdout', new=StringIO()) as fake_print:
             bms_output_handler.print_bms_readings_to_console(bms_readings)
             self.assertEqual(fake_print.getvalue(), expected_output)
