@@ -1,12 +1,12 @@
-#BMS Sender
+# BMS Sender
 
-##Quality Parameters
+## Quality Parameters
 
 - Cyclomatic Complexity CCN = 4  
 - Duplication = --min-lines 3 --min-tokens 35 --threshold 0  
 - coverage >= 95%  
 
-##Design
+## Design
 
 During the development of BMS Sender, the following aspects are considered  
 Note: I have tried to incorporate it to the best of the ability  
