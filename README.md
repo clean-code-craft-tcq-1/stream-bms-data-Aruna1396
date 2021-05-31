@@ -104,16 +104,21 @@ Example:-
 
 `stream_bms_readings("local_database", "console", bms_parameters_with_range, 1, 15)`
 
-## Sample Output 1
+### Sample Output 1
 
-`bms_parameters_with_range = {'charging_temperature': {'min': 0, 'max': 45},
-                            'charge_rate': {'min': 0, 'max': 0.8}}`
+bms_parameters_with_range = {'charging_temperature': {'min': 0, 'max': 45},
+                            'charge_rate': {'min': 0, 'max': 0.8}}  
+
+![output 1](https://github.com/clean-code-craft-tcq-1/stream-bms-data-Aruna1396/blob/8112cf769763bf57bd3fec4cccda81dc04880233/bms_sender/docs/BMSSenderOuput_2Parameters.png)  
 
 
 
-## Sample Output 2
+### Sample Output 2
 
-`bms_parameters_with_range = {'charging_temperature': {'min': 0, 'max': 45},
+bms_parameters_with_range = {'charging_temperature': {'min': 0, 'max': 45},
                             'charge_rate': {'min': 0, 'max': 0.8},
-                            'SOC': {'min': 20, 'max': 80}}`
+                            'SOC': {'min': 20, 'max': 80}}  
+
+![output 2](https://github.com/clean-code-craft-tcq-1/stream-bms-data-Aruna1396/blob/8112cf769763bf57bd3fec4cccda81dc04880233/bms_sender/docs/BMSSenderOuput_3Parameters.png)  
+
 
