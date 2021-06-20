@@ -29,7 +29,7 @@ jobs:
         run: |
           coverage run --branch bms_sender/bms_sender_test.py
           coverage html -d bms_sender/htmlcov
-          coverage run --branch bms_receiver/bms_stream_receiver_handler.test.py.py
+          coverage run --branch bms_receiver/bms_stream_receiver_handler.test.py
           coverage html -d bms_receiver/htmlcov
       - name: Upload coverage for sender
         uses: actions/upload-artifact@v2
