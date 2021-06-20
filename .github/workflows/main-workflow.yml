@@ -28,12 +28,20 @@ jobs:
       - name: Run and collect coverage
         run: |
           coverage run --branch bms_sender/bms_sender_test.py
-          coverage html
-      - name: Upload coverage
+          coverage html -d bms_sender/htmlcov
+          coverage run --branch bms_receiver/bms_stream_receiver_handler.test.py.py
+          coverage html -d bms_receiver/htmlcov
+      - name: Upload coverage for sender
         uses: actions/upload-artifact@v2
         with:
-          name: coverage
-          path: ./htmlcov
+          name: sender coverage
+          path: bms_sender/htmlcov
+          retention-days: 1
+      - name: Upload coverage for receiver
+        uses: actions/upload-artifact@v2
+        with:
+          name: receiver coverage
+          path: bms_receiver/htmlcov
           retention-days: 1
       - name: Run
-        run: python bms_sender/bms_sender.py
+        run: python bms_sender/bms_sender.py | python bms_receiver/bms_receiver.py
